@@ -1,3 +1,2 @@
-sv_ttk
-yaml
+pyyaml
 pillow
