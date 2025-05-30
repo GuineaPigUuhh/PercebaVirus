@@ -1,9 +1,6 @@
 ## Vírus Perceba
 it's an executable file that passes itself off as a roblox gift code generator
 
-> [!WARNING]
-> THIS CODE IS VERY BAD, so make a pull request or an issue to improve it.
-
 ## Requirements
 run this code to install the requirements:
 ```cmd
