@@ -1,4 +1,4 @@
-## Vírus Perceba
+## Roblox fake gift code generator
 it's an executable file that passes itself off as a roblox gift code generator
 
 ## Requirements
