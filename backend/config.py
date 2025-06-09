@@ -1,9 +1,8 @@
-# Here you can configure Virus
-# have fun modifying
+import json
+import backend.paths as paths
 
-url = "https://raw.githubusercontent.com/GuineaPigUuhh/randomimgs/main/perceba.jpeg"
+content = json.load(open(paths.json("config")))
 
-def fileIN(i):
-    imgvirus = 'YOUR IP' # Name of the image to be created on the desktop
-    extvirus = 'jpeg' # Image Extension
-    return f'{imgvirus} ({i}).{extvirus}'
+def get(name: str):
+    global content
+    return content[name]
