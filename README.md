@@ -13,8 +13,8 @@ to customize look at the config file **(res/data/config.json)**
 {
     "files_range": 100,
     "file": {
-        "url": "https://images.ctfassets.net/3mv54pzvptwz/55YLwKPDnRXkqMBITRpWbC/0c2aefc04afa455c20e9ca0d209698e0/53174188191_42d4c831ae_o.jpg",
-        "output_name": "Neymar"
+        "url": "",
+        "output_name": "IDK"
     },
     "chars": [
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
