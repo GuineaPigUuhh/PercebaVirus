@@ -7,6 +7,12 @@ run this code to install the requirements:
 pip install -r requirements.txt
 ```
 
+## Compile
+run this code to compile the code to exe:
+```bash
+python compile.py
+```
+
 ## Customizing
 to customize look at the config file **(res/data/config.json)**
 ```json
