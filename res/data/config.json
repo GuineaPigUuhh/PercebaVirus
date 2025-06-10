@@ -9,5 +9,14 @@
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
         "U", "V", "W", "X", "Y", "Z"
-    ]
+    ],
+    "compiler": {
+        "output_folder": "output",
+        "icon": "icon.ico",
+        "main": "main.py",
+        "additional_files": [
+            "res/",
+            "icon.ico"
+        ]
+    }
 }

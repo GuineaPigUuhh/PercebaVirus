@@ -15,6 +15,9 @@ def json(path):
 
 # GLOBAL
 
+def abspath(path=""):
+    return p.abspath(path)
+
 def userprofile(path):
     profile = "USERPROFILE"
     return p.join(os.environ[profile], path)
