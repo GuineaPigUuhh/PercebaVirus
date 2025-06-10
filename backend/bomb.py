@@ -21,7 +21,9 @@ def reload():
 def attack():
     global success
     if not success:
+        print('Operating System not supported or is without internet!')
         return
+    
     global file_config, image
         
     def name(index):
