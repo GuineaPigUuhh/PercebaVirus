@@ -30,9 +30,9 @@ jobs:
     - name: Compile
       run: |
         python compile.py
-    - name: Upload on GitHub 
+    - name: Upload Artifact
       uses: actions/upload-artifact@v4.4.0
       with:
-          name: Roblox-fake-giftcard-generator-${{ steps.ver.outputs.content }}-${{ github.run_id}}
+          name: Roblox-fake-giftcard-generator-${{ github.run_id}}
           path: output/dist
         
